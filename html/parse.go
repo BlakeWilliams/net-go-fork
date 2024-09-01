@@ -324,10 +324,11 @@ func (p *parser) addText(text string) {
 // addElement adds a child element based on the current token.
 func (p *parser) addElement() {
 	p.addChild(&Node{
-		Type:     ElementNode,
-		DataAtom: p.tok.DataAtom,
-		Data:     p.tok.Data,
-		Attr:     p.tok.Attr,
+		Type:            ElementNode,
+		DataAtom:        p.tok.DataAtom,
+		Data:            p.tok.Data,
+		Attr:            p.tok.Attr,
+		OriginalTagName: p.tok.OriginalTagName,
 	})
 }
 

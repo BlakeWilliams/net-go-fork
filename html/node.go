@@ -49,6 +49,9 @@ type Node struct {
 	Data      string
 	Namespace string
 	Attr      []Attribute
+
+	// OriginalTagName is an extension to support GOAT
+	OriginalTagName []byte
 }
 
 // InsertBefore inserts newChild as a child of n, immediately before oldChild
@@ -140,10 +143,11 @@ func reparentChildren(dst, src *Node) {
 // The clone has no parent, no siblings and no children.
 func (n *Node) clone() *Node {
 	m := &Node{
-		Type:     n.Type,
-		DataAtom: n.DataAtom,
-		Data:     n.Data,
-		Attr:     make([]Attribute, len(n.Attr)),
+		Type:            n.Type,
+		DataAtom:        n.DataAtom,
+		Data:            n.Data,
+		Attr:            make([]Attribute, len(n.Attr)),
+		OriginalTagName: n.OriginalTagName,
 	}
 	copy(m.Attr, n.Attr)
 	return m
